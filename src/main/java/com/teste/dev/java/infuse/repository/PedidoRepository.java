@@ -7,4 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
+
+    List<Pedido> findByDataCadastro(Date data);
+
+    List<Pedido> findByNumero(Integer numero);
+
+    List<Pedido> findByNumeroAndDataCadastro(Integer numero, Date data);
 }
