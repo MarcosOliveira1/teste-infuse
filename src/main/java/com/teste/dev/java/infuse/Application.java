@@ -1,4 +1,4 @@
-package com.teste.dev.infuse.teste.dev.java.WEB.infuse;
+package com.teste.dev.java.infuse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
