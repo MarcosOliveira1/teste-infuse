@@ -87,4 +87,10 @@ public abstract class AbstractTestSupport {
         input.setPedidos(getPedidos());
         return input;
     }
+
+    protected List<Pedido> getPedidosEntidade() {
+        List<Pedido> pedidos = new ArrayList<>();
+        getPedidos().forEach(pedidoDTO -> pedidos.add(pedidoDTO.paraEntidade()));
+        return pedidos;
+    }
 }

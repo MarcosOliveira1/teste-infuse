@@ -2,6 +2,7 @@ package com.teste.dev.java.infuse.service;
 
 
 import com.teste.dev.java.infuse.AbstractTestSupport;
+import com.teste.dev.java.infuse.dto.PedidoDTO;
 import com.teste.dev.java.infuse.dto.PedidoInputDTO;
 import com.teste.dev.java.infuse.exception.NegocioException;
 import com.teste.dev.java.infuse.repository.PedidoRepository;
@@ -18,6 +19,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -78,5 +81,31 @@ public class PedidoServiceImplTest extends AbstractTestSupport {
         expectedException.expectMessage(String.format(CLIENTE_NAO_ENCONTRADO, 1));
 
         pedidoService.cadastrarPedido(getPedidoInput());
+    }
+
+    @Test
+    @DisplayName("Deve trazer todos os pedidos")
+    public void buscarTodosPedidos() throws ParseException {
+
+        when(pedidoRepository.findAll()).thenReturn(getPedidosEntidade());
+
+        List<PedidoDTO> pedidos = pedidoService.buscarPedidos(null, null, true);
+
+        assertEquals(3, pedidos.size());
+        assertEquals(Optional.of(5).get(), pedidos.get(0).getQuantidade());
+        assertEquals(NOME_PRODUTO_1, pedidos.get(0).getNome());
+    }
+
+    @Test
+    @DisplayName("Deve trazer o pedido por numero")
+    public void buscarPedidosPorNumero() throws ParseException {
+
+        when(pedidoRepository.findByNumero(1)).thenReturn(List.of(getPedidoEntidade()));
+
+        List<PedidoDTO> pedidos = pedidoService.buscarPedidos(1, null, false);
+
+        assertEquals(1, pedidos.size());
+        assertEquals(Optional.of(5).get(), pedidos.get(0).getQuantidade());
+        assertEquals(NOME_PRODUTO_1, pedidos.get(0).getNome());
     }
 }
