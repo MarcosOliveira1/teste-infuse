@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Pedido</title>
+</head>
+<body>
+<h3>Adicionar Pedido</h3>
+<hr />
+
+<form name="formPedido" novalidate>
+
+  <div class="row">
+    <div class="col-sm-5 col-md-5">
+      <div class="form-group">
+        <label>Numero</label>
+        <input name="numero" ng-model="pedido.numero" class="form-control" ng-init="pedido.numero"  type="number" required />
+          <span style = "color:red" ng-show="formPedido.numero.$dirty && formPedido.numero.$invalid">
+            <span ng-show="formPedido.numero.$error.required">Numero do pedido é obrigatório.</span>
+          </span>
+      </div>
+
+      <div class="form-group">
+        <label>Data Cadastro:</label>
+        <input ng-model="pedido.dataCadastro" class="form-control" ng-init="pedido.dataCadastro"  type="date" name="data"/>
+      </div>
+
+      <div class="form-group">
+        <label>Nome:</label>
+        <input ng-model="pedido.nome" class="form-control" ng-init="pedido.nome"  type="text" name="nome" required />
+        <span style = "color:red" ng-show="formPedido.nome.$dirty && formPedido.nome.$invalid">
+          <span ng-show="formPedido.nome.$error.required">Nome do produto é obrigatório.</span>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Valor:</label>
+        <input ng-model="pedido.valor" class="form-control" ng-init="pedido.valor"  type="text" name="valor" required />
+        <span style = "color:red" ng-show="formPedido.valor.$dirty && formPedido.valor.$invalid">
+          <span ng-show="formPedido.valor.$error.required">valor do produto é obrigatório.</span>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Quantidade:</label>
+        <input ng-model="pedido.quantidade" class="form-control" ng-init="pedido.quantidade"  name="quantidade" type="number" min="1" />
+      </div>
+      <div class="form-group">
+        <label>Cliente</label>
+        <select class="form-control" ng-model="pedido.cliente" name="cliente" ng-required="required">
+          <option ng-repeat="cliente in vm.clientes" ng-value="cliente">{{cliente.nome}}</option>
+        </select>
+        <span style = "color:red" ng-show="formPedido.cliente.$dirty && formPedido.cliente.$invalid">
+          <span ng-show="formPedido.cliente.$error.required">valor do produto é obrigatório.</span>
+        </span>
+      </div>
+      <button type="button" ng-click="vm.addPedido()" class="btn btn-primary pull-left"
+              ng-disabled="formPedido.numero.$invalid ||
+                           formPedido.nome.$invalid ||
+                            formPedido.valor.$invalid ||
+                            formPedido.cliente.$invalid">Adicionar</button></div>
+
+
+
+    <div class="col-sm-7 col-md-7">
+
+      <div ng-repeat="pedido in pedidosList">
+        <div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Nº</th>
+              <th>Produto</th>
+              <th>Data Cadastro</th>
+              <th>Quantidade</th>
+              <th>Cliente</th>
+              <th>Valor unitario</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{pedido.numero}}</td>
+              <td>{{pedido.nome}}</td>
+              <td>{{pedido.dataCadastro}}</td>
+              <td>{{pedido.quantidade}}</td>
+              <td>{{pedido.cliente.nome}}</td>
+              <td>{{pedido.valor | currency}}</td>
+              <td>{{vm.calcularTotal(pedido.quantidade, pedido.valor) | currency}}</td>
+              <td ng-click="vm.removerPedido($index)"><span><img src="/images/delete.svg" alt="del"></span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr/>
+      </div>
+
+      <button type="button" ng-click="vm.salvarPedido()" ng-hide="pedidosList.length == 0" class="btn btn-primary pull-left">Enviar</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-3 col-md-3">
+        <div class="form-group">
+            <label>Numero</label>
+            <input ng-model="numeroFiltro" ng-change="vm.iniciarFiltrar()" class="form-control" ng-init="numeroFiltro"  type="number" required />
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+        <div class="form-group">
+            <label>Data Cadastro:</label>
+            <input ng-model="dataFiltro" ng-change="vm.iniciarFiltrar()" class="form-control" ng-init="dataFiltro"  type="date"/>
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" style="margin-top: 35px" id="todos" ng-model="todosFiltro" ng-checked="todosFiltro" ng-click="vm.filtrarTodos()">
+            <label class="form-check-label" for="todos">
+                Todos
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+        <button type="button" class="btn btn-primary pull-left" style="margin-top: 25px" ng-click="vm.buscarPedidos()">Filtrar</button></div>
+</div>
+</div>
+<lista-de-pedidos pedidos="vm.pedidos"></lista-de-pedidos>
+</body>
+</html>

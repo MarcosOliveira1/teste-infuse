@@ -1,0 +1,29 @@
+<div ng-repeat="pedido in pedidos">
+  <h3>Pedido #{{pedido.numero}}</h3>
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Data Cadastro</th>
+        <th>Quantidade</th>
+        <th>Cliente</th>
+        <th>Valor unitario</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{pedido.nome}}</td>
+        <td>{{pedido.dataCadastro}}</td>
+        <td>{{pedido.quantidade}}</td>
+        <td>{{pedido.cliente.id}} {{pedido.cliente.nome}}</td>
+        <td>{{pedido.valor | currency}}</td>
+        <td>{{pedido.valorTotal | currency}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr/>
+</div>
