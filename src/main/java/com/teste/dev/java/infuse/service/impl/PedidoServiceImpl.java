@@ -8,6 +8,8 @@ import com.teste.dev.java.infuse.repository.PedidoRepository;
 import com.teste.dev.java.infuse.service.PedidoService;
 import com.teste.dev.java.infuse.util.AssertUtils;
 import com.teste.dev.java.infuse.util.DataUtil;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -29,7 +31,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public PedidoInputDTO cadastrarPedido(PedidoInputDTO pedidos) {
+    public ResponseEntity<PedidoInputDTO> cadastrarPedido(PedidoInputDTO pedidos) {
         PedidoInputDTO pedidosCadastrados = new PedidoInputDTO();
         pedidos.getPedidos().forEach(pedido -> {
 
@@ -39,7 +41,7 @@ public class PedidoServiceImpl implements PedidoService {
             pedidosCadastrados.getPedidos()
                     .add(pedidoRepository.save(pedido.paraEntidade()).paraDTO());
         });
-        return pedidosCadastrados;
+        return new ResponseEntity<>(pedidosCadastrados, HttpStatus.CREATED);
     }
 
     @Override

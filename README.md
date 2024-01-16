@@ -1,7 +1,7 @@
 # Teste INFUSE TECNOLOGIA LTDA
 ### Tecnologias usadas:
 - Java 17, Spring, Junit, mockito, flyway, mysql, lombok, maven, AngularJs.
-- Consumo e consulta à API por xml.
+- Consumo e consulta à API por xml e Json.
 #
 ## Instruçes para deploy
 ### Criar banco de dados no mysql com nome **testeinfuse**. As tabelas são criadas pelo flyway ao iniciar a aplicação

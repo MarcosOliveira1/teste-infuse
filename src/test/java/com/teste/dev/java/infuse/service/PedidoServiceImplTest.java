@@ -56,7 +56,7 @@ public class PedidoServiceImplTest extends AbstractTestSupport {
         when(clienteService.buscarPorID(anyInt())).thenReturn(getClienteOptional());
         when(pedidoRepository.save(any())).thenReturn(getPedidoEntidade());
 
-        PedidoInputDTO pedidoInputDTO = pedidoService.cadastrarPedido(getPedidoInput());
+        PedidoInputDTO pedidoInputDTO = pedidoService.cadastrarPedido(getPedidoInput()).getBody();
 
         assertEquals(Optional.of(5).get(), pedidoInputDTO.getPedidos().get(0).getQuantidade());
         assertEquals(NOME_PRODUTO_1, pedidoInputDTO.getPedidos().get(0).getNome());

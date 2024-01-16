@@ -5,6 +5,7 @@ import com.teste.dev.java.infuse.dto.PedidoInputDTO;
 import com.teste.dev.java.infuse.service.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -18,7 +19,7 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @PostMapping("/novo")
-    public PedidoInputDTO novoPedido(@RequestBody @Valid PedidoInputDTO pedidoInput){
+    public ResponseEntity<PedidoInputDTO> novoPedido(@RequestBody @Valid PedidoInputDTO pedidoInput){
         return pedidoService.cadastrarPedido(pedidoInput);
     }
 
